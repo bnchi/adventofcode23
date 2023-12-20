@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs'
 
-import day4 from './day4/index.js'
+import day6 from './day6/index.js'
 
-const testInput = readFileSync('./day4/input.txt', 'utf8')
-day4(testInput)
+const testInput = readFileSync('./day6/input.txt', 'utf8')
+day6(testInput)
