@@ -1,5 +1,5 @@
 class TreeNode {
-  constructor(val) {
+  constructor() {
     this.left = null
     this.right = null
   }
@@ -19,9 +19,24 @@ function solve(testInput) {
     map[source] = node
   }
 
+  let currentPositions = []
+  for (let key of Object.keys(map)) {
+    if (key[2] == 'A') currentPositions.push(key)
+  }
+
+  let x = {}
+  for (let i = 0; i < currentPositions.length; i++) {
+    x[currentPositions[i]] = totalStepsToReachZ(currentPositions[i], map, direction)
+  }
+
+  console.log(x) // find lcm of these numbers
+}
+
+function totalStepsToReachZ(sourceNode, map, direction) {
   let found = false
   let i = 0
-  let currentNode = map['AAA'] 
+
+  let currentNode = map[sourceNode] 
   let totalSteps = 0
   while (!found) {
     let movingTo = null
@@ -31,17 +46,17 @@ function solve(testInput) {
       movingTo = currentNode.right
     }
 
-    if (movingTo == 'ZZZ') {
+    if (movingTo[2] == 'Z') {
       found = true
     }
+
     currentNode = map[movingTo]
     totalSteps += 1
- 
+
     i = (i + 1) % direction.length
   }
 
-  console.log(totalSteps)
-
+  return totalSteps
 }
 
 
