@@ -3,7 +3,6 @@ function solve(testInput) {
     'A': 14,
     'K': 13,
     'Q': 12,
-    'J': 11,
     'T': 10,
     '9': 9,
     '8': 8,
@@ -12,7 +11,8 @@ function solve(testInput) {
     '5': 5,
     '4': 4,
     '3': 3,
-    '2': 2
+    '2': 2,
+    'J': 0,
   }
 
   let rankArr = []
@@ -20,25 +20,28 @@ function solve(testInput) {
   for (const value of testInput) {
     let [card, bid] = value.split(' ')
 
-    const [newArr, freq] = buildFrequency(card)
+    const [newArr, freq, totalJokers] = buildFrequency(card)
     const size = newArr.length
 
     bid = parseInt(bid)
+    let kindType = -1
     if (isHighCard(size)) {
-      rankArr.push([0, card, bid])
+      kindType = 0
     } else if (isOnePair(size)) {
-      rankArr.push([1, card, bid])
+      kindType = 1
     } else if (isTwoPair(newArr, freq)) {
-      rankArr.push([2, card, bid])
+      kindType = 2
     } else if (isThreeOfKind(newArr, freq)) {
-      rankArr.push([3, card, bid])
+      kindType = 3
     } else if (isFullHouse(newArr, freq)) {
-      rankArr.push([4, card, bid])
+      kindType = 4
     } else if (isFourOfAKind(newArr, freq)) {
-      rankArr.push([5, card, bid])
+      kindType = 5
     } else if (isFiveOfKind(size)) {
-      rankArr.push([6, card, bid])
-    }   
+      kindType = 6
+    } 
+
+    rankArr.push([kindType, card, bid])
   }
 
   rankArr.sort((a, b) => {
@@ -48,7 +51,7 @@ function solve(testInput) {
           return charRank[a[1][j]] - charRank[b[1][j]]
         }
       }
-    }
+    } 
 
     return a[0] - b[0]
   })
