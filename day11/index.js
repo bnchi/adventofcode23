@@ -47,26 +47,24 @@ function solve(testInput) {
     for (let j = i + 1; j < points.length; j++) {
       const [leftx, lefty] = points[j]
 
+      const distance = Math.abs(rightx - leftx) + Math.abs(righty - lefty)
+
       let totalRowsBetweenGalaxies = 0
       // check how many rows are between each point 
       for (let r = Math.min(leftx, rightx); r < Math.max(leftx, rightx); r++) {
         if (emptyRows.includes(r)) {
-          totalRowsBetweenGalaxies += 1000000
-        } else {
           totalRowsBetweenGalaxies += 1
-        }
+        }       
       }
 
       let totalColsBetweenGalaxies = 0
       for (let c = Math.min(lefty, righty); c < Math.max(lefty, righty); c++) {
         if (emptyCols.includes(c)) {
-          totalColsBetweenGalaxies += 1000000
-        } else {
           totalColsBetweenGalaxies += 1
-        }
+        }       
       }
 
-      sum += totalRowsBetweenGalaxies + totalColsBetweenGalaxies
+      sum += distance + totalRowsBetweenGalaxies + totalColsBetweenGalaxies
     }
   }
 
