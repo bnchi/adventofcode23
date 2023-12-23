@@ -46,7 +46,6 @@ function solve(testInput) {
     const [rightx, righty] = points[i]
     for (let j = i + 1; j < points.length; j++) {
       const [leftx, lefty] = points[j]
-
       const distance = Math.abs(rightx - leftx) + Math.abs(righty - lefty)
 
       let totalRowsBetweenGalaxies = 0
@@ -69,7 +68,6 @@ function solve(testInput) {
   }
 
   console.log(sum)
-
 }
 
 export default function start(input) {
